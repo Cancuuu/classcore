@@ -3,7 +3,7 @@ import { useState } from 'react'
 type FormValue = string | number | Object
 
 export const useForm = (values: Object) => {
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<any>({
     ...values
   })
 

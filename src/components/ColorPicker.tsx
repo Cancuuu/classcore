@@ -1,5 +1,5 @@
-import { TextInput, View, Text, Pressable } from 'react-native'
-import { colors, lightShadow, strongShadow } from '../constants/theme'
+import { View, Pressable } from 'react-native'
+import { colors } from '../constants/theme'
 
 const COLORS_FOR_PICK = [colors.green, colors.pink, colors.orange, colors.turquoise]
 

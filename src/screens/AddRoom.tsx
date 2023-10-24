@@ -6,9 +6,10 @@ import { colors, lightShadow } from '../constants/theme'
 import { useForm } from '../hooks/useForm'
 import { ColorPicker } from '../components/ColorPicker'
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
+import { StyledTextInput } from '../components/StyledTextInput'
 
 const DEFAULT_ROOM_FORM = {
-  id: '',
+  id: 0,
   name: '',
   subject: '',
   description: '',
@@ -36,6 +37,7 @@ const AddRoom = () => {
     const lastRoom = 0
     handleFormValueChange('id', lastRoom + 1)
     handleFormValueChange('timestampCreation', Date.now())
+    console.log('formValues', formValues)
   }
 
   return (
@@ -45,9 +47,18 @@ const AddRoom = () => {
           <Label text="Select room color" />
           <ColorPicker setColor={setRoomColor} colorSelected={color} />
         </View>
-        <Input label={'name'} onChange={handleFormValueChange} />
-        <Input label={'subject'} onChange={handleFormValueChange} />
-        <Input label={'description'} onChange={handleFormValueChange} />
+        <StyledTextInput
+          label="name"
+          onChangeText={(text) => handleFormValueChange('name', text)}
+        />
+        <StyledTextInput
+          label="subject"
+          onChangeText={(text) => handleFormValueChange('subject', text)}
+        />
+        <StyledTextInput
+          label="description"
+          onChangeText={(text) => handleFormValueChange('description', text)}
+        />
         <View
           style={{
             flexDirection: 'row',
@@ -95,28 +106,5 @@ const AddRoom = () => {
     </Layout>
   )
 }
-
-type TInput = {
-  onChange: any
-  label: string
-  placeholder?: string
-}
-
-const Input = ({ onChange, label }: TInput) => (
-  <View key={label}>
-    <TextInput
-      style={{
-        backgroundColor: '#FFF',
-        borderRadius: 24,
-        padding: 18,
-        fontSize: 18,
-        ...lightShadow
-      }}
-      onChangeText={(text) => onChange(label, text)}
-      placeholder={label.charAt(0).toUpperCase() + label.slice(1)}
-      placeholderTextColor={colors.darkGray}
-    />
-  </View>
-)
 
 export default AddRoom
