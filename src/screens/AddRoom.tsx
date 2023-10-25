@@ -1,7 +1,6 @@
 import { View, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import Layout from '../layout'
-import { Label } from '../components/Text'
 import { colors, lightShadow } from '../constants/theme'
 import { useForm } from '../hooks/useForm'
 import { ColorPicker } from '../components/ColorPicker'
@@ -35,10 +34,9 @@ const AddRoom = () => {
   }
 
   return (
-    <Layout titleHeader="Create new room">
-      <View style={{ gap: 28, paddingHorizontal: 8 }}>
+    <Layout titleHeader="Create new room" backButton>
+      <View style={{ gap: 28, marginTop: 24 }}>
         <View>
-          <Label text="Select room color" />
           <ColorPicker setColor={setRoomColor} colorSelected={color} />
         </View>
         <StyledTextInput label={NAME} onChangeText={(text) => handleFormValueChange(NAME, text)} />

@@ -21,9 +21,8 @@ const Header = () => (
 
 const Home = () => {
   return (
-    <Layout>
-      <Header />
-      <View style={{ marginTop: 24 }}>
+    <Layout backButton={false}>
+      <View style={{ marginTop: 12 }}>
         <Title text={`Welcome to ClassCore`} />
         <View style={{ marginTop: 48, gap: 12 }}>
           <Link to={'/AddRoom'}>
