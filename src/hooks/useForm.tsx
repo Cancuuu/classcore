@@ -1,15 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { TIMESTAMP_CREATION } from '../constants'
+import * as Yup from 'yup'
 
 type TFormValue = string | number | Object
-type TErrorsObject = {
-  [key: string]: string
-}
 
 export const useForm = (values: Object) => {
   const [formValues, setFormValues] = useState<any>({
     ...values
   })
-  const [formErrors, setFormErrors] = useState<TErrorsObject | null>(null)
+  const [formErrors, setFormErrors] = useState<Object | null>(null)
+
+  useEffect(() => {
+    handleFormValueChange(TIMESTAMP_CREATION, Date.now())
+  }, [])
 
   const handleFormValueChange = (key: string, value: TFormValue) => {
     setFormValues((prevFormValues: any) => ({
@@ -18,7 +21,24 @@ export const useForm = (values: Object) => {
     }))
   }
 
-  const validateForm = () => {}
+  const validateForm = async (schema: Yup.ObjectSchema<any>) => {
+    try {
+      await schema.validate(formValues)
+      return true
+    } catch (error) {
+      if (error) {
+        setFormErrors(error)
+        return false
+      }
+    }
+  }
 
-  return [formValues, handleFormValueChange, setFormValues, validateForm, formErrors] as const
+  return [
+    formValues,
+    handleFormValueChange,
+    setFormValues,
+    validateForm,
+    formErrors,
+    setFormErrors
+  ] as const
 }

@@ -5,21 +5,19 @@ import { Label } from '../components/Text'
 import { colors, lightShadow } from '../constants/theme'
 import { useForm } from '../hooks/useForm'
 import { ColorPicker } from '../components/ColorPicker'
-// import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
 import { StyledTextInput } from '../components/StyledTextInput'
-import { roomSchema } from '../constants/schemas'
-import {
-  COLOR,
-  DEFAULT_ROOM_FORM,
-  DESCRIPTION,
-  ID,
-  NAME,
-  SUBJECT,
-  TIMESTAMP_CREATION
-} from '../constants'
+import { ROOM_SCHEMA } from '../constants/schemas'
+import { COLOR, DEFAULT_ROOM_FORM, DESCRIPTION, NAME, SUBJECT } from '../constants'
 
 const AddRoom = () => {
-  const [formValues, handleFormValueChange, setFormValues] = useForm(DEFAULT_ROOM_FORM)
+  const [
+    formValues,
+    handleFormValueChange,
+    setFormValues,
+    validateForm,
+    formErrors,
+    setFormErrors
+  ] = useForm(DEFAULT_ROOM_FORM)
   const [color, setColor] = useState<string | null>(null)
 
   const setRoomColor = (color: string) => {
@@ -28,13 +26,11 @@ const AddRoom = () => {
   }
 
   const handleSubmit = async () => {
-    handleFormValueChange(ID, 2)
-    handleFormValueChange(TIMESTAMP_CREATION, Date.now())
-    try {
-      await roomSchema.validate(formValues)
-      console.log('🥳🥳🥳🥳🥳')
-    } catch (error) {
-      console.log('Validation error:', error)
+    const isFormValid = await validateForm(ROOM_SCHEMA)
+    if (isFormValid) {
+      // save the room
+    } else {
+      // show errors
     }
   }
 
