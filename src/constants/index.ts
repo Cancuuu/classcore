@@ -1,3 +1,5 @@
+const AS_CLASSCORE_KEY = '@classcore'
+
 const ID = 'id'
 const NAME = 'name'
 const LAST_NAME = 'lastName'
@@ -29,5 +31,6 @@ export {
   AGE,
   EMAIL,
   ADDRESS,
-  GENDER
+  GENDER,
+  AS_CLASSCORE_KEY
 }
