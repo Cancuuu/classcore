@@ -1,43 +1,41 @@
-import { TextInput, View, Text, Pressable } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import Layout from '../layout'
 import { Label } from '../components/Text'
 import { colors, lightShadow } from '../constants/theme'
 import { useForm } from '../hooks/useForm'
 import { ColorPicker } from '../components/ColorPicker'
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
+// import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
 import { StyledTextInput } from '../components/StyledTextInput'
-
-const DEFAULT_ROOM_FORM = {
-  id: 0,
-  name: '',
-  subject: '',
-  description: '',
-  color: '',
-  roomTimestamp: new Date(),
-  timestampCreation: 0
-}
+import { roomSchema } from '../constants/schemas'
+import {
+  COLOR,
+  DEFAULT_ROOM_FORM,
+  DESCRIPTION,
+  ID,
+  NAME,
+  SUBJECT,
+  TIMESTAMP_CREATION
+} from '../constants'
 
 const AddRoom = () => {
-  const [formValues, handleFormValueChange] = useForm(DEFAULT_ROOM_FORM)
+  const [formValues, handleFormValueChange, setFormValues] = useForm(DEFAULT_ROOM_FORM)
   const [color, setColor] = useState<string | null>(null)
 
   const setRoomColor = (color: string) => {
     setColor(color)
-    handleFormValueChange('color', color)
+    handleFormValueChange(COLOR, color)
   }
 
-  const onChangeTimestamp = (event: DateTimePickerEvent, date?: Date | undefined) => {
-    if (date) {
-      handleFormValueChange('roomTimestamp', date)
+  const handleSubmit = async () => {
+    handleFormValueChange(ID, 2)
+    handleFormValueChange(TIMESTAMP_CREATION, Date.now())
+    try {
+      await roomSchema.validate(formValues)
+      console.log('🥳🥳🥳🥳🥳')
+    } catch (error) {
+      console.log('Validation error:', error)
     }
-  }
-
-  const handleSubmit = () => {
-    const lastRoom = 0
-    handleFormValueChange('id', lastRoom + 1)
-    handleFormValueChange('timestampCreation', Date.now())
-    console.log('formValues', formValues)
   }
 
   return (
@@ -47,62 +45,36 @@ const AddRoom = () => {
           <Label text="Select room color" />
           <ColorPicker setColor={setRoomColor} colorSelected={color} />
         </View>
+        <StyledTextInput label={NAME} onChangeText={(text) => handleFormValueChange(NAME, text)} />
         <StyledTextInput
-          label="name"
-          onChangeText={(text) => handleFormValueChange('name', text)}
+          label={SUBJECT}
+          onChangeText={(text) => handleFormValueChange(SUBJECT, text)}
         />
         <StyledTextInput
-          label="subject"
-          onChangeText={(text) => handleFormValueChange('subject', text)}
+          label={DESCRIPTION}
+          onChangeText={(text) => handleFormValueChange(DESCRIPTION, text)}
         />
-        <StyledTextInput
-          label="description"
-          onChangeText={(text) => handleFormValueChange('description', text)}
-        />
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}
-        >
-          <Label text="Date and hour" />
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={formValues.roomTimestamp}
-            mode="datetime"
-            onChange={onChangeTimestamp}
-            display="compact"
-            minimumDate={new Date()}
-            accentColor={color || '#000'}
-          />
-        </View>
-      </View>
-      <Pressable
-        style={{
-          marginTop: 48
-        }}
-        onPress={() => handleSubmit()}
-      >
-        <View
-          style={{
-            backgroundColor: color || colors.darkGray,
-            borderRadius: 24,
-            padding: 18,
-            ...lightShadow
-          }}
-        >
-          <Text
+        <Pressable onPress={() => handleSubmit()}>
+          <View
             style={{
-              fontSize: 18,
-              color: '#FFF',
-              textAlign: 'center'
+              backgroundColor: color || colors.darkGray,
+              borderRadius: 24,
+              padding: 18,
+              ...lightShadow
             }}
           >
-            Create Room
-          </Text>
-        </View>
-      </Pressable>
+            <Text
+              style={{
+                fontSize: 18,
+                color: '#FFF',
+                textAlign: 'center'
+              }}
+            >
+              Create Room
+            </Text>
+          </View>
+        </Pressable>
+      </View>
     </Layout>
   )
 }
