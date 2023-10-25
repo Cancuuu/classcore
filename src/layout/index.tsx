@@ -3,7 +3,7 @@ import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Subtitle, Title } from '../components/Text'
 import { useNavigation } from '@react-navigation/native'
-import { colors } from '../constants/theme'
+import { colors, lightShadow } from '../constants/theme'
 
 export interface LayoutProps {
   children: React.ReactNode
@@ -22,16 +22,23 @@ const Layout = ({ children, titleHeader, backButton }: LayoutProps) => {
           <Pressable
             style={{
               flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center'
+              flexDirection: 'row'
             }}
             onPress={() => navigator.goBack()}
           >
-            <Title text="👈" />
             <Text
               style={{
-                fontSize: 12,
+                fontSize: 36,
                 color: colors.darkGray
+              }}
+            >
+              👈
+            </Text>
+            <Text
+              style={{
+                fontSize: 18,
+                color: colors.darkGray,
+                marginTop: 14
               }}
             >
               Back
