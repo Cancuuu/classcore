@@ -69,4 +69,15 @@ const Label = ({ text, color }: TCustomText) => (
   </Text>
 )
 
-export { Title, TitleMD, TitleSM, Subtitle, Paragraph, Label }
+const LabelSM = ({ text, color }: TCustomText) => (
+  <Text
+    style={{
+      fontSize: 12,
+      color: color || colors.darkGray
+    }}
+  >
+    {text}
+  </Text>
+)
+
+export { Title, TitleMD, TitleSM, Subtitle, Paragraph, Label, LabelSM }

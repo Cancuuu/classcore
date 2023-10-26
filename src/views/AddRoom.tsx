@@ -41,8 +41,8 @@ const AddRoom = () => {
   }
 
   return (
-    <Layout titleHeader="Create new room" backButton>
-      <View style={{ gap: 28, marginTop: 24 }}>
+    <Layout titleHeader="Create new room" rightEmoji="✏️" backButton>
+      <View style={{ gap: 28 }}>
         <View>
           <ColorPicker setColor={setRoomColor} colorSelected={color} />
         </View>

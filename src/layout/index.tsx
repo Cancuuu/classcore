@@ -3,15 +3,16 @@ import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Subtitle, Title } from '../components/Text'
 import { useNavigation } from '@react-navigation/native'
-import { colors, lightShadow } from '../constants/theme'
+import { colors } from '../constants/theme'
 
 export interface LayoutProps {
   children: React.ReactNode
   titleHeader?: string
   backButton: boolean
+  rightEmoji: string
 }
 
-const Layout = ({ children, titleHeader, backButton }: LayoutProps) => {
+const Layout = ({ children, titleHeader, backButton, rightEmoji }: LayoutProps) => {
   const { top } = useSafeAreaInsets()
   const navigator = useNavigation()
 
@@ -19,37 +20,32 @@ const Layout = ({ children, titleHeader, backButton }: LayoutProps) => {
     <View
       style={[{ padding: 12, backgroundColor: '#F5F7F8', flex: 1 }, top > 0 && { paddingTop: top }]}
     >
-      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         {backButton && (
-          <Pressable
-            style={{
-              flex: 1,
-              flexDirection: 'row'
-            }}
-            onPress={() => navigator.goBack()}
-          >
+          <Pressable onPress={() => navigator.goBack()}>
             <Text
               style={{
-                fontSize: 36,
-                color: colors.darkGray
+                fontSize: 28
               }}
             >
               👈
             </Text>
-            <Text
-              style={{
-                fontSize: 18,
-                color: colors.darkGray,
-                marginTop: 14
-              }}
-            >
-              Back
-            </Text>
           </Pressable>
         )}
         {titleHeader && (
-          <View style={{ marginBottom: 36, flex: 2.5 }}>
+          <View style={{ marginBottom: 36 }}>
             <Subtitle text={titleHeader} />
+          </View>
+        )}
+        {rightEmoji && (
+          <View style={{ marginBottom: 36 }}>
+            <Text
+              style={{
+                fontSize: 28
+              }}
+            >
+              {rightEmoji}
+            </Text>
           </View>
         )}
       </View>
@@ -60,4 +56,13 @@ const Layout = ({ children, titleHeader, backButton }: LayoutProps) => {
 
 export default Layout
 
-//
+{
+  /* <Text
+              style={{
+                fontSize: 36,
+                color: colors.darkGray
+              }}
+            >
+              👈
+            </Text> */
+}
