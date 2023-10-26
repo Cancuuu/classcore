@@ -3,7 +3,8 @@ enum Routes {
   ADD_ROOM = 'AddRoom',
   ROOMS_OVERVIEW = 'RoomsOverview',
   ADD_STUDENT = 'AddStudent',
-  ROOM = 'Room'
+  ROOM = 'Room',
+  SELECTION_MODAL = 'SelectionModal'
 }
 
 export const APP_ROUTES = Object.values(Routes)

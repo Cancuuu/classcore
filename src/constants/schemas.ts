@@ -22,7 +22,6 @@ const STUDENT_SCHEMA = Yup.object().shape({
     .oneOf(['male', 'female', 'other'] as const)
     .defined(),
   [EMAIL]: Yup.string().email(),
-  [ADDRESS]: Yup.string().required(),
   [TIMESTAMP_CREATION]: Yup.number().required()
 })
 

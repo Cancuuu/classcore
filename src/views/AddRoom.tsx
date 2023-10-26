@@ -7,7 +7,7 @@ import { ColorPicker } from '../components/ColorPicker'
 import { StyledTextInput } from '../components/StyledTextInput'
 import { ROOM_SCHEMA } from '../constants/schemas'
 import { COLOR, DEFAULT_ROOM_FORM, DESCRIPTION, NAME, SUBJECT } from '../constants'
-import { useStore, Store_addRoom } from '../store'
+import { Store_addRoom } from '../store'
 
 const AddRoom = () => {
   const [

@@ -21,6 +21,15 @@ export const DEFAULT_ROOM_FORM = {
   [TIMESTAMP_CREATION]: 0
 }
 
+export const DEFAULT_STUDENT_FORM = {
+  [NAME]: '',
+  [LAST_NAME]: '',
+  [AGE]: '',
+  [GENDER]: '',
+  [EMAIL]: '',
+  [TIMESTAMP_CREATION]: ''
+}
+
 export {
   ID,
   AS_CLASSCORE_KEY,

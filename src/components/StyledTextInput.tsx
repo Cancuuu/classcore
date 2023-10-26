@@ -8,9 +8,17 @@ type TInput = {
   placeholder?: string
   key?: string | number
   errorMessage?: string
+  keyboardType?: any
 }
 
-export const StyledTextInput = ({ onChangeText, label, value, key, errorMessage }: TInput) => (
+export const StyledTextInput = ({
+  onChangeText,
+  label,
+  value,
+  key,
+  errorMessage,
+  keyboardType
+}: TInput) => (
   <View>
     <TextInput
       autoCorrect={false}
@@ -26,6 +34,7 @@ export const StyledTextInput = ({ onChangeText, label, value, key, errorMessage 
       onChangeText={onChangeText}
       placeholder={label.charAt(0).toUpperCase() + label.slice(1)}
       placeholderTextColor={colors.darkGray}
+      keyboardType={keyboardType || 'default'}
     />
     {errorMessage && (
       <View
