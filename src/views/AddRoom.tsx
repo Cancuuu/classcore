@@ -33,7 +33,8 @@ const AddRoom = () => {
     if (isFormValid) {
       console.log('Its valid! 🥳')
       Store_addRoom(formValues)
-      // resetForm()
+      resetForm()
+      setColor(null)
     } else {
       // create an alert
       console.log('is not valid', formErrors)
@@ -47,17 +48,17 @@ const AddRoom = () => {
           <ColorPicker setColor={setRoomColor} colorSelected={color} />
         </View>
         <StyledTextInput
-          value={formValues.NAME}
+          value={formValues[NAME]}
           label={NAME}
           onChangeText={(text) => handleFormValueChange(NAME, text)}
         />
         <StyledTextInput
-          value={formValues.SUBJECT}
+          value={formValues[SUBJECT]}
           label={SUBJECT}
           onChangeText={(text) => handleFormValueChange(SUBJECT, text)}
         />
         <StyledTextInput
-          value={formValues.DESCRIPTION}
+          value={formValues[DESCRIPTION]}
           label={DESCRIPTION}
           onChangeText={(text) => handleFormValueChange(DESCRIPTION, text)}
         />

@@ -7,7 +7,7 @@ import AddRoom from './views/AddRoom'
 import RoomsOverview from './views/RoomsOverview'
 import AddStudent from './views/AddStudent'
 import Room from './views/Room'
-
+import Routes from './routes'
 const Stack = createNativeStackNavigator()
 
 function App() {
@@ -19,13 +19,13 @@ function App() {
           screenOptions={{
             headerShown: false
           }}
-          initialRouteName="Home"
+          initialRouteName={Routes.HOME}
         >
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="AddRoom" component={AddRoom} />
-          <Stack.Screen name="RoomsOverview" component={RoomsOverview} />
-          <Stack.Screen name="AddStudent" component={AddStudent} />
-          <Stack.Screen name="Room" component={Room} />
+          <Stack.Screen name={Routes.HOME} component={Home} />
+          <Stack.Screen name={Routes.ADD_ROOM} component={AddRoom} />
+          <Stack.Screen name={Routes.ROOMS_OVERVIEW} component={RoomsOverview} />
+          <Stack.Screen name={Routes.ADD_STUDENT} component={AddStudent} />
+          <Stack.Screen name={Routes.ROOM} component={Room} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

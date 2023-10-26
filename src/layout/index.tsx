@@ -18,14 +18,17 @@ const Layout = ({ children, titleHeader, backButton, rightEmoji }: LayoutProps) 
 
   return (
     <View
-      style={[{ padding: 12, backgroundColor: '#F5F7F8', flex: 1 }, top > 0 && { paddingTop: top }]}
+      style={[
+        { padding: 12, backgroundColor: '#F5F7F8', flex: 1 },
+        top > 0 && { paddingTop: top + 12 }
+      ]}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         {backButton && (
           <Pressable onPress={() => navigator.goBack()}>
             <Text
               style={{
-                fontSize: 28
+                fontSize: 36
               }}
             >
               👈

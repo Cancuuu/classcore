@@ -4,6 +4,7 @@ import Layout from '../layout'
 import { Label, LabelSM, Paragraph, Subtitle, Title } from '../components/Text'
 import RoomCard from '../components/RoomCard'
 import { lightShadow } from '../constants/theme'
+import { useNavigation } from '@react-navigation/native'
 
 interface IRoomProps {
   navigation: any
@@ -39,36 +40,39 @@ const Room = ({ navigation, route }: IRoomProps) => {
   )
 }
 
-const RoomsButtons = () => (
-  <View
-    style={{
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      backgroundColor: '#FFF',
-      padding: 12,
-      borderRadius: 12,
-      ...lightShadow
-    }}
-  >
-    <Pressable>
-      <View style={{ alignItems: 'center', gap: 4 }}>
-        <Paragraph text="✏️" />
-        <Label text="Edit Room" />
-      </View>
-    </Pressable>
-    <Pressable>
-      <View style={{ alignItems: 'center', gap: 4 }}>
-        <Paragraph text="❌" />
-        <Label text="Delete Room" />
-      </View>
-    </Pressable>
-    <Pressable>
-      <View style={{ alignItems: 'center', gap: 4 }}>
-        <Paragraph text="👌" />
-        <Label text="New Room" />
-      </View>
-    </Pressable>
-  </View>
-)
+const RoomsButtons = () => {
+  const navigator = useNavigation()
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#FFF',
+        padding: 12,
+        borderRadius: 12,
+        ...lightShadow
+      }}
+    >
+      <Pressable>
+        <View style={{ alignItems: 'center', gap: 4 }}>
+          <Paragraph text="✏️" />
+          <Label text="Edit Room" />
+        </View>
+      </Pressable>
+      <Pressable>
+        <View style={{ alignItems: 'center', gap: 4 }}>
+          <Paragraph text="❌" />
+          <Label text="Delete Room" />
+        </View>
+      </Pressable>
+      <Pressable onPress={() => navigator.navigate('AddRoom')}>
+        <View style={{ alignItems: 'center', gap: 4 }}>
+          <Paragraph text="👌" />
+          <Label text="New Room" />
+        </View>
+      </Pressable>
+    </View>
+  )
+}
 
 export default Room

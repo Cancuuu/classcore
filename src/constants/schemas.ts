@@ -9,17 +9,10 @@ import {
   ID,
   LAST_NAME,
   NAME,
+  STUDENTS,
   SUBJECT,
   TIMESTAMP_CREATION
 } from '../constants'
-
-const ROOM_SCHEMA = Yup.object().shape({
-  [NAME]: Yup.string().required(),
-  [SUBJECT]: Yup.string().required(),
-  [DESCRIPTION]: Yup.string().required(),
-  [COLOR]: Yup.string().required(),
-  [TIMESTAMP_CREATION]: Yup.number().required()
-})
 
 const STUDENT_SCHEMA = Yup.object().shape({
   [NAME]: Yup.string().required(),
@@ -31,6 +24,15 @@ const STUDENT_SCHEMA = Yup.object().shape({
   [EMAIL]: Yup.string().email(),
   [ADDRESS]: Yup.string().required(),
   [TIMESTAMP_CREATION]: Yup.number().required()
+})
+
+const ROOM_SCHEMA = Yup.object().shape({
+  [NAME]: Yup.string().required(),
+  [SUBJECT]: Yup.string().required(),
+  [DESCRIPTION]: Yup.string().required(),
+  [COLOR]: Yup.string().required(),
+  [TIMESTAMP_CREATION]: Yup.number().required(),
+  [STUDENTS]: Yup.array().of(STUDENT_SCHEMA)
 })
 
 export { ROOM_SCHEMA, STUDENT_SCHEMA }

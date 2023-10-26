@@ -11,6 +11,7 @@ const AGE = 'age'
 const EMAIL = 'email'
 const ADDRESS = 'address'
 const GENDER = 'gender'
+const STUDENTS = 'students'
 
 export const DEFAULT_ROOM_FORM = {
   [NAME]: '',
@@ -22,6 +23,7 @@ export const DEFAULT_ROOM_FORM = {
 
 export {
   ID,
+  AS_CLASSCORE_KEY,
   NAME,
   LAST_NAME,
   SUBJECT,
@@ -32,5 +34,5 @@ export {
   EMAIL,
   ADDRESS,
   GENDER,
-  AS_CLASSCORE_KEY
+  STUDENTS
 }
