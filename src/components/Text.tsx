@@ -14,6 +14,28 @@ const Title = ({ text, color }: TCustomText) => (
   </Text>
 )
 
+const TitleMD = ({ text, color }: TCustomText) => (
+  <Text
+    style={{
+      fontSize: 32,
+      color: color || colors.darkGray
+    }}
+  >
+    {text}
+  </Text>
+)
+
+const TitleSM = ({ text, color }: TCustomText) => (
+  <Text
+    style={{
+      fontSize: 28,
+      color: color || colors.darkGray
+    }}
+  >
+    {text}
+  </Text>
+)
+
 const Subtitle = ({ text, color }: TCustomText) => (
   <Text
     style={{
@@ -47,4 +69,4 @@ const Label = ({ text, color }: TCustomText) => (
   </Text>
 )
 
-export { Title, Subtitle, Paragraph, Label }
+export { Title, TitleMD, TitleSM, Subtitle, Paragraph, Label }

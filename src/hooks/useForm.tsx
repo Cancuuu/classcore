@@ -33,12 +33,18 @@ export const useForm = (values: Object) => {
     }
   }
 
+  const resetForm = () =>
+    setFormValues({
+      ...values
+    })
+
   return [
     formValues,
     handleFormValueChange,
     setFormValues,
     validateForm,
     formErrors,
-    setFormErrors
+    setFormErrors,
+    resetForm
   ] as const
 }

@@ -13,6 +13,7 @@ type TInput = {
 export const StyledTextInput = ({ onChangeText, label, value, key, errorMessage }: TInput) => (
   <View>
     <TextInput
+      autoCorrect={false}
       key={label}
       value={value}
       style={{

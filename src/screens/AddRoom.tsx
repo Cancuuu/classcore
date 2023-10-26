@@ -7,6 +7,7 @@ import { ColorPicker } from '../components/ColorPicker'
 import { StyledTextInput } from '../components/StyledTextInput'
 import { ROOM_SCHEMA } from '../constants/schemas'
 import { COLOR, DEFAULT_ROOM_FORM, DESCRIPTION, NAME, SUBJECT } from '../constants'
+import { useStore, Store_addRoom } from '../store'
 
 const AddRoom = () => {
   const [
@@ -15,9 +16,12 @@ const AddRoom = () => {
     setFormValues,
     validateForm,
     formErrors,
-    setFormErrors
+    setFormErrors,
+    resetForm
   ] = useForm(DEFAULT_ROOM_FORM)
   const [color, setColor] = useState<string | null>(null)
+
+  console.log('formValues', formValues)
 
   const setRoomColor = (color: string) => {
     setColor(color)
@@ -27,9 +31,12 @@ const AddRoom = () => {
   const handleSubmit = async () => {
     const isFormValid = await validateForm(ROOM_SCHEMA)
     if (isFormValid) {
-      // save the room
+      console.log('Its valid! 🥳')
+      Store_addRoom(formValues)
+      // resetForm()
     } else {
-      // show errors
+      // create an alert
+      console.log('is not valid', formErrors)
     }
   }
 
@@ -39,12 +46,18 @@ const AddRoom = () => {
         <View>
           <ColorPicker setColor={setRoomColor} colorSelected={color} />
         </View>
-        <StyledTextInput label={NAME} onChangeText={(text) => handleFormValueChange(NAME, text)} />
         <StyledTextInput
+          value={formValues.NAME}
+          label={NAME}
+          onChangeText={(text) => handleFormValueChange(NAME, text)}
+        />
+        <StyledTextInput
+          value={formValues.SUBJECT}
           label={SUBJECT}
           onChangeText={(text) => handleFormValueChange(SUBJECT, text)}
         />
         <StyledTextInput
+          value={formValues.DESCRIPTION}
           label={DESCRIPTION}
           onChangeText={(text) => handleFormValueChange(DESCRIPTION, text)}
         />

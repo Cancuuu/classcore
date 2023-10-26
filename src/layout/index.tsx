@@ -16,7 +16,9 @@ const Layout = ({ children, titleHeader, backButton }: LayoutProps) => {
   const navigator = useNavigation()
 
   return (
-    <View style={[{ padding: 12, backgroundColor: '#F5F7F8' }, top > 0 && { paddingTop: top }]}>
+    <View
+      style={[{ padding: 12, backgroundColor: '#F5F7F8', flex: 1 }, top > 0 && { paddingTop: top }]}
+    >
       <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         {backButton && (
           <Pressable

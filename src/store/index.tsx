@@ -30,3 +30,5 @@ export const Store_addStudent = (newStudent: TStudent) =>
   useStore.setState((state: IInitialGlobaState) => ({
     Store_students: [...state.Store_students, newStudent]
   }))
+
+export const reset = () => useStore.setState(INITIAL_GLOBAL_STATE)
