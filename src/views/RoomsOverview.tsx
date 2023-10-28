@@ -14,6 +14,8 @@ interface IRoomOverviewProps {
 const RoomsOverview = ({ navigation }: IRoomOverviewProps) => {
   const useRooms = useStore((state) => state.Store_rooms)
 
+  console.log('useRooms', useRooms)
+
   return (
     <Layout titleHeader="Rooms overview" rightEmoji="🎓" backButton>
       <FlatList

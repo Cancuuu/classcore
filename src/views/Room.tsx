@@ -14,6 +14,8 @@ interface IRoomProps {
 const Room = ({ navigation, route }: IRoomProps) => {
   const room = route.params.room.item
 
+  console.log('The room', room)
+
   return (
     <Layout backButton titleHeader="Room" rightEmoji={'🍎'}>
       <FlatList

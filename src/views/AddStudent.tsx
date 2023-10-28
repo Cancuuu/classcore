@@ -1,5 +1,5 @@
 import { Pressable, View, Text } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../layout'
 import { useForm } from '../hooks/useForm'
 import { ADDRESS, AGE, DEFAULT_STUDENT_FORM, EMAIL, LAST_NAME, NAME } from '../constants'
@@ -8,8 +8,14 @@ import { STUDENT_SCHEMA } from '../constants/schemas'
 import { colors, lightShadow } from '../constants/theme'
 import { Picker } from '@react-native-picker/picker'
 import { TRoom } from '../types'
+import { useStore } from '../store'
 
-const AddStudent = ({ navigation }: { navigation: any }) => {
+interface IAddStudentProps {
+  navigation: any
+  route: any
+}
+
+const AddStudent = ({ navigation, route }: IAddStudentProps) => {
   const [
     formValues,
     handleFormValueChange,
@@ -19,8 +25,15 @@ const AddStudent = ({ navigation }: { navigation: any }) => {
     setFormErrors,
     resetForm
   ] = useForm(DEFAULT_STUDENT_FORM)
-  const [selectedRooms, setSelectedRooms] = useState<Array<TRoom>>([])
-  const qtySelectedRooms = selectedRooms.length
+  const [selectedRooms, setSelectedRooms] = useState<Array<any>>([])
+  const rooms = useStore((state) => state.Store_rooms)
+  const qtySelectedRooms = selectedRooms?.length
+
+  useEffect(() => {
+    if (route.params.selectedOptions) {
+      setSelectedRooms(route.params.selectedOptions)
+    }
+  }, [route.params])
 
   const handleSubmit = async () => {
     const isFormValid = await validateForm(STUDENT_SCHEMA)
@@ -60,7 +73,9 @@ const AddStudent = ({ navigation }: { navigation: any }) => {
         <Pressable
           onPress={() =>
             navigation.navigate('SelectionModal', {
-              options: [1, 2, 3, 4, 5]
+              lastRoute: 'AddStudent',
+              options: rooms,
+              prevSelectedOptions: selectedRooms
             })
           }
         >
