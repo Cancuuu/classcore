@@ -49,4 +49,4 @@ export const Store_addStudentToRoom = (student: TStudent, roomIds: string[]) =>
     }
   })
 
-export const reset = () => useStore.setState(INITIAL_GLOBAL_STATE)
+export const resetStateAndStorage = () => useStore.setState(INITIAL_GLOBAL_STATE)

@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import { AGE, LAST_NAME, NAME, TIMESTAMP_CREATION } from '../constants'
 import { TRoom } from '../types'
 import EmptyList from '../components/EmptyList'
+import Routes from '../routes'
 
 interface IRoomProps {
   navigation: any
@@ -101,7 +102,7 @@ const RoomsButtons = () => {
           <Label text="Delete Room" />
         </View>
       </Pressable>
-      <Pressable onPress={() => navigator.navigate('AddRoom')}>
+      <Pressable onPress={() => navigator.navigate(Routes.ADD_ROOM)}>
         <View style={{ alignItems: 'center', gap: 4 }}>
           <Paragraph text="👌" />
           <Label text="New Room" />

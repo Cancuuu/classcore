@@ -8,7 +8,7 @@ export interface LayoutProps {
   children: React.ReactNode
   titleHeader?: string
   backButton: boolean
-  rightEmoji: string
+  rightEmoji?: string
 }
 
 const Layout = ({ children, titleHeader, backButton, rightEmoji }: LayoutProps) => {
@@ -57,14 +57,3 @@ const Layout = ({ children, titleHeader, backButton, rightEmoji }: LayoutProps) 
 }
 
 export default Layout
-
-{
-  /* <Text
-              style={{
-                fontSize: 36,
-                color: colors.darkGray
-              }}
-            >
-              👈
-            </Text> */
-}

@@ -7,6 +7,7 @@ import { StyledTextInput } from '../components/StyledTextInput'
 import { STUDENT_SCHEMA } from '../constants/schemas'
 import { colors, lightShadow } from '../constants/theme'
 import { Store_addStudentToRoom, useStore } from '../store'
+import Routes from '../routes'
 
 // @todo add picker for gender field
 
@@ -30,10 +31,10 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
   const qtySelectedRooms = selectedRooms?.length
 
   useEffect(() => {
-    if (route.params.selectedOptions) {
+    if (route.params?.selectedOptions) {
       setSelectedRooms(route.params.selectedOptions)
     }
-  }, [route.params])
+  }, [route.params?.selectedOptions])
 
   const handleSubmit = async () => {
     const isFormValid = await validateForm(STUDENT_SCHEMA)
@@ -41,6 +42,7 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
       const roomsIds = selectedRooms.map((room) => room.id)
       console.log('roomsIds', roomsIds)
       Store_addStudentToRoom(formValues, roomsIds)
+      setSelectedRooms([])
       resetForm()
     } else {
       console.log('is not valid', formErrors)
@@ -74,8 +76,8 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
         />
         <Pressable
           onPress={() =>
-            navigation.navigate('SelectionModal', {
-              lastRoute: 'AddStudent',
+            navigation.navigate(Routes.SELECTION_MODAL, {
+              lastRoute: Routes.ADD_STUDENT,
               options: rooms,
               prevSelectedOptions: selectedRooms
             })

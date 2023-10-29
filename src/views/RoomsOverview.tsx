@@ -4,6 +4,7 @@ import Layout from '../layout'
 import { useStore } from '../store'
 import RoomCard from '../components/RoomCard'
 import EmptyList from '../components/EmptyList'
+import Routes from '../routes'
 
 interface IRoomOverviewProps {
   navigation: any
@@ -23,7 +24,7 @@ const RoomsOverview = ({ navigation }: IRoomOverviewProps) => {
         renderItem={(room) => (
           <Pressable
             onPress={() =>
-              navigation.navigate('Room', {
+              navigation.navigate(Routes.ROOM, {
                 room
               })
             }
