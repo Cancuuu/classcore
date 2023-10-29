@@ -8,7 +8,6 @@ import { StyledTextInput } from '../components/StyledTextInput'
 import { ROOM_SCHEMA } from '../constants/schemas'
 import { COLOR, DEFAULT_ROOM_FORM, DESCRIPTION, ID, NAME, SUBJECT } from '../constants'
 import { Store_addRoom } from '../store'
-import uuid from 'react-native-uuid'
 
 const AddRoom = () => {
   const [
@@ -21,10 +20,6 @@ const AddRoom = () => {
     resetForm
   ] = useForm(DEFAULT_ROOM_FORM)
   const [color, setColor] = useState<string | null>(null)
-
-  useEffect(() => {
-    console.log('form values', formValues)
-  }, [formValues])
 
   const setRoomColor = (color: string) => {
     setColor(color)
@@ -39,7 +34,7 @@ const AddRoom = () => {
       resetForm()
       setColor(null)
     } else {
-      // create an alert
+      // @todo create an alert
       console.log('is not valid', formErrors)
     }
   }

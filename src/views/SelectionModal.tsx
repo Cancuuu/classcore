@@ -8,6 +8,7 @@ interface ISelectionModalProps {
   navigation: any
   route: any
 }
+
 const SelectionModal = ({ navigation, route }: ISelectionModalProps) => {
   const { options, lastRoute, prevSelectedOptions } = route.params
   const [selectedOptions, setSelectedOptions] = useState<any>(prevSelectedOptions || [])

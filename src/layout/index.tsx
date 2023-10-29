@@ -1,9 +1,8 @@
 import { Pressable, View, Text } from 'react-native'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Subtitle, Title } from '../components/Text'
+import { Subtitle } from '../components/Text'
 import { useNavigation } from '@react-navigation/native'
-import { colors } from '../constants/theme'
 
 export interface LayoutProps {
   children: React.ReactNode

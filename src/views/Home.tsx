@@ -7,19 +7,6 @@ import { MainButton } from '../components/MainButton'
 import { colors } from '../constants/theme'
 import { reset } from '../store'
 
-const Header = () => (
-  <View
-    style={{
-      justifyContent: 'space-between',
-      flexDirection: 'row',
-      alignItems: 'center'
-    }}
-  >
-    <Subtitle text="Home" />
-    <Subtitle text="user" />
-  </View>
-)
-
 const Home = () => (
   <Layout backButton={false} rightEmoji={''}>
     <View style={{ marginTop: 12 }}>

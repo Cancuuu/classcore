@@ -1,5 +1,3 @@
-import { TStudent } from '../types'
-
 const AS_CLASSCORE_KEY = '@classcore'
 
 const ID = 'id'

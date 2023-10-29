@@ -8,6 +8,8 @@ import { STUDENT_SCHEMA } from '../constants/schemas'
 import { colors, lightShadow } from '../constants/theme'
 import { Store_addStudentToRoom, useStore } from '../store'
 
+// @todo add picker for gender field
+
 interface IAddStudentProps {
   navigation: any
   route: any

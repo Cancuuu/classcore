@@ -1,5 +1,5 @@
-import { View, Text, TextInput, Button } from 'react-native'
-import { Label, Paragraph, Subtitle, Title } from '../components/Text'
+import { View } from 'react-native'
+import { Paragraph } from '../components/Text'
 import { colors, lightShadow } from '../constants/theme'
 
 export const MainButton = ({ title, color }: { title: string; color?: string }) => (
