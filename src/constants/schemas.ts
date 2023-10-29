@@ -15,17 +15,19 @@ import {
 } from '../constants'
 
 const STUDENT_SCHEMA = Yup.object().shape({
+  [ID]: Yup.string().required(),
   [NAME]: Yup.string().required(),
   [LAST_NAME]: Yup.string().required(),
   [AGE]: Yup.string().required(),
-  [GENDER]: Yup.string()
-    .oneOf(['male', 'female', 'other'] as const)
-    .defined(),
+  // [GENDER]: Yup.string()
+  //   .oneOf(['male', 'female', 'other'] as const)
+  //   .defined(),
   [EMAIL]: Yup.string().email(),
   [TIMESTAMP_CREATION]: Yup.number().required()
 })
 
 const ROOM_SCHEMA = Yup.object().shape({
+  [ID]: Yup.string().required(),
   [NAME]: Yup.string().required(),
   [SUBJECT]: Yup.string().required(),
   [DESCRIPTION]: Yup.string().required(),

@@ -9,7 +9,6 @@ import AddStudent from './views/AddStudent'
 import Room from './views/Room'
 import Routes from './routes'
 import SelectionModal from './views/SelectionModal'
-
 const Stack = createNativeStackNavigator()
 
 function App() {

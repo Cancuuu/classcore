@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { TIMESTAMP_CREATION } from '../constants'
+import { TIMESTAMP_CREATION, ID } from '../constants'
 import * as Yup from 'yup'
+import uuid from 'react-native-uuid'
 
 type TFormValue = string | number | Object
 
@@ -11,8 +12,13 @@ export const useForm = (values: Object) => {
   const [formErrors, setFormErrors] = useState<Object | null>(null)
 
   useEffect(() => {
-    handleFormValueChange(TIMESTAMP_CREATION, Date.now())
+    initial()
   }, [])
+
+  const initial = () => {
+    handleFormValueChange(TIMESTAMP_CREATION, Date.now())
+    handleFormValueChange(ID, uuid.v4())
+  }
 
   const handleFormValueChange = (key: string, value: TFormValue) => {
     setFormValues((prevFormValues: any) => ({
@@ -33,10 +39,12 @@ export const useForm = (values: Object) => {
     }
   }
 
-  const resetForm = () =>
+  const resetForm = () => {
     setFormValues({
       ...values
     })
+    initial()
+  }
 
   return [
     formValues,

@@ -1,3 +1,5 @@
+import { TStudent } from '../types'
+
 const AS_CLASSCORE_KEY = '@classcore'
 
 const ID = 'id'
@@ -14,14 +16,17 @@ const GENDER = 'gender'
 const STUDENTS = 'students'
 
 export const DEFAULT_ROOM_FORM = {
+  [ID]: '',
   [NAME]: '',
   [SUBJECT]: '',
   [DESCRIPTION]: '',
   [COLOR]: '',
-  [TIMESTAMP_CREATION]: 0
+  [TIMESTAMP_CREATION]: 0,
+  [STUDENTS]: []
 }
 
 export const DEFAULT_STUDENT_FORM = {
+  [ID]: '',
   [NAME]: '',
   [LAST_NAME]: '',
   [AGE]: '',

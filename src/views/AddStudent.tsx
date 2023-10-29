@@ -6,9 +6,8 @@ import { ADDRESS, AGE, DEFAULT_STUDENT_FORM, EMAIL, LAST_NAME, NAME } from '../c
 import { StyledTextInput } from '../components/StyledTextInput'
 import { STUDENT_SCHEMA } from '../constants/schemas'
 import { colors, lightShadow } from '../constants/theme'
-import { Picker } from '@react-native-picker/picker'
 import { TRoom } from '../types'
-import { useStore } from '../store'
+import { Store_addStudentToRoom, useStore } from '../store'
 
 interface IAddStudentProps {
   navigation: any
@@ -29,6 +28,8 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
   const rooms = useStore((state) => state.Store_rooms)
   const qtySelectedRooms = selectedRooms?.length
 
+  console.log('UPDATED ROOMS 👉', rooms)
+
   useEffect(() => {
     if (route.params.selectedOptions) {
       setSelectedRooms(route.params.selectedOptions)
@@ -38,7 +39,10 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
   const handleSubmit = async () => {
     const isFormValid = await validateForm(STUDENT_SCHEMA)
     if (isFormValid) {
-      console.log('Its valid! 🥳')
+      const roomsIds = selectedRooms.map((room) => room.id)
+      console.log('roomsIds', roomsIds)
+
+      Store_addStudentToRoom(formValues, roomsIds)
       resetForm()
     } else {
       console.log('is not valid', formErrors)

@@ -36,35 +36,14 @@ const SelectionModal = ({ navigation, route }: ISelectionModalProps) => {
       >
         <Subtitle text="Select an option" />
       </View>
-      {options.map(
-        (
-          option: {
-            students?:
-              | {
-                  email?: string | undefined
-                  name: string
-                  timestampCreation: number
-                  lastName: string
-                  age: string
-                  gender: 'male' | 'female' | 'other'
-                }[]
-              | undefined
-            name: string
-            subject: string
-            description: string
-            color: string
-            timestampCreation: number
-          },
-          _: React.Key | null | undefined
-        ) => (
-          <Pressable style={{ width: '100%' }} key={_} onPress={() => selectOption(option)}>
-            <RoomCard room={option} />
-            <View style={{ position: 'absolute', bottom: 24, right: 5 }}>
-              <Text style={{ fontSize: 42 }}>{wasSelected(option) ? '✅' : ''}</Text>
-            </View>
-          </Pressable>
-        )
-      )}
+      {options.map((option: any) => (
+        <Pressable style={{ width: '100%' }} key={option.id} onPress={() => selectOption(option)}>
+          <RoomCard room={option} />
+          <View style={{ position: 'absolute', bottom: 24, right: 5 }}>
+            <Text style={{ fontSize: 42 }}>{wasSelected(option) ? '✅' : ''}</Text>
+          </View>
+        </Pressable>
+      ))}
       <View
         style={{
           position: 'absolute',

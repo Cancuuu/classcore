@@ -1,13 +1,14 @@
 import { View, Text, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../layout'
 import { colors, lightShadow } from '../constants/theme'
 import { useForm } from '../hooks/useForm'
 import { ColorPicker } from '../components/ColorPicker'
 import { StyledTextInput } from '../components/StyledTextInput'
 import { ROOM_SCHEMA } from '../constants/schemas'
-import { COLOR, DEFAULT_ROOM_FORM, DESCRIPTION, NAME, SUBJECT } from '../constants'
+import { COLOR, DEFAULT_ROOM_FORM, DESCRIPTION, ID, NAME, SUBJECT } from '../constants'
 import { Store_addRoom } from '../store'
+import uuid from 'react-native-uuid'
 
 const AddRoom = () => {
   const [
@@ -21,7 +22,9 @@ const AddRoom = () => {
   ] = useForm(DEFAULT_ROOM_FORM)
   const [color, setColor] = useState<string | null>(null)
 
-  console.log('formValues', formValues)
+  useEffect(() => {
+    console.log('form values', formValues)
+  }, [formValues])
 
   const setRoomColor = (color: string) => {
     setColor(color)

@@ -31,10 +31,10 @@ const Room = ({ navigation, route }: IRoomProps) => {
             </View>
           </>
         }
-        data={room.participants}
-        renderItem={() => (
+        data={room.students}
+        renderItem={(item) => (
           <View>
-            <Label text="Edit Room" />
+            <Label text={item.item.name} />
           </View>
         )}
       />

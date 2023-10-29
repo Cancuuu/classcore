@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { AS_CLASSCORE_KEY } from '../constants'
+import { AS_CLASSCORE_KEY, STUDENTS } from '../constants'
 import { TRoom, TStudent } from '../types'
 
 interface IInitialGlobaState {
@@ -26,9 +26,27 @@ export const Store_addRoom = (newRoom: TRoom) =>
     Store_rooms: [...state.Store_rooms, newRoom]
   }))
 
-export const Store_addStudent = (newStudent: TStudent) =>
-  useStore.setState((state: IInitialGlobaState) => ({
-    Store_students: [...state.Store_students, newStudent]
-  }))
+// export const Store_addStudent = (newStudent: TStudent) =>
+//   useStore.setState((state: IInitialGlobaState) => ({
+//     Store_students: [...state.Store_students, newStudent]
+//   }))
+
+export const Store_addStudentToRoom = (student: TStudent, roomIds: string[]) =>
+  useStore.setState((state: IInitialGlobaState) => {
+    const updatedRooms = state.Store_rooms.map((room) => {
+      if (roomIds.includes(room.id)) {
+        return {
+          ...room,
+          students: [...room.students, student]
+        }
+      }
+      return room
+    })
+
+    return {
+      Store_rooms: updatedRooms,
+      Store_students: [...state.Store_students, student]
+    }
+  })
 
 export const reset = () => useStore.setState(INITIAL_GLOBAL_STATE)
