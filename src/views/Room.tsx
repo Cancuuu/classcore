@@ -9,6 +9,7 @@ import { AGE, LAST_NAME, NAME, TIMESTAMP_CREATION } from '../constants'
 import { TRoom } from '../types'
 import EmptyList from '../components/EmptyList'
 import Routes from '../routes'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 interface IRoomProps {
   navigation: any
@@ -78,7 +79,8 @@ const StudentCard = ({ student }: any) => (
 )
 
 const RoomsButtons = () => {
-  const navigator = useNavigation()
+  const navigator = useNavigation<NativeStackNavigationProp<any>>()
+
   return (
     <View
       style={{

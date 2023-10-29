@@ -21,6 +21,13 @@ const AddRoom = () => {
   ] = useForm(DEFAULT_ROOM_FORM)
   const [color, setColor] = useState<string | null>(null)
 
+  const errorMessage = formErrors
+    ? {
+        message: formErrors?.toString(),
+        time: 10000
+      }
+    : null
+
   const setRoomColor = (color: string) => {
     setColor(color)
     handleFormValueChange(COLOR, color)
@@ -40,7 +47,7 @@ const AddRoom = () => {
   }
 
   return (
-    <Layout titleHeader="Create new room" rightEmoji="✏️" backButton>
+    <Layout titleHeader="Create new room" rightEmoji="✏️" backButton errorMessage={errorMessage}>
       <View style={{ gap: 28 }}>
         <View>
           <ColorPicker setColor={setRoomColor} colorSelected={color} />
