@@ -2,11 +2,10 @@ import { Pressable, View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Layout from '../layout'
 import { useForm } from '../hooks/useForm'
-import { ADDRESS, AGE, DEFAULT_STUDENT_FORM, EMAIL, LAST_NAME, NAME } from '../constants'
+import { AGE, DEFAULT_STUDENT_FORM, EMAIL, LAST_NAME, NAME } from '../constants'
 import { StyledTextInput } from '../components/StyledTextInput'
 import { STUDENT_SCHEMA } from '../constants/schemas'
 import { colors, lightShadow } from '../constants/theme'
-import { TRoom } from '../types'
 import { Store_addStudentToRoom, useStore } from '../store'
 
 interface IAddStudentProps {
@@ -27,8 +26,6 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
   const [selectedRooms, setSelectedRooms] = useState<Array<any>>([])
   const rooms = useStore((state) => state.Store_rooms)
   const qtySelectedRooms = selectedRooms?.length
-
-  console.log('UPDATED ROOMS 👉', rooms)
 
   useEffect(() => {
     if (route.params.selectedOptions) {
