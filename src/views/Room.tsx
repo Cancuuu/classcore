@@ -6,6 +6,8 @@ import RoomCard from '../components/RoomCard'
 import { lightShadow } from '../constants/theme'
 import { useNavigation } from '@react-navigation/native'
 import { AGE, LAST_NAME, NAME, TIMESTAMP_CREATION } from '../constants'
+import { TRoom } from '../types'
+import EmptyList from '../components/EmptyList'
 
 interface IRoomProps {
   navigation: any
@@ -21,21 +23,24 @@ const Room = ({ route }: IRoomProps) => {
         style={{
           paddingHorizontal: 8
         }}
-        ListHeaderComponent={
-          <>
-            <RoomCard room={room} />
-            <RoomsButtons />
-            <View style={{ marginTop: 24, marginBottom: 12 }}>
-              <Subtitle text="Students" />
-            </View>
-          </>
-        }
+        ListHeaderComponent={<Header room={room} />}
+        ListEmptyComponent={<EmptyList listName="students" />}
         data={room.students}
         renderItem={(item) => <StudentCard student={item.item} />}
       />
     </Layout>
   )
 }
+
+const Header = ({ room }: { room: TRoom }) => (
+  <>
+    <RoomCard room={room} />
+    <RoomsButtons />
+    <View style={{ marginTop: 24, marginBottom: 12 }}>
+      <Subtitle text="Students" />
+    </View>
+  </>
+)
 
 const StudentCard = ({ student }: any) => (
   <View

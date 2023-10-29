@@ -38,7 +38,6 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
     if (isFormValid) {
       const roomsIds = selectedRooms.map((room) => room.id)
       console.log('roomsIds', roomsIds)
-
       Store_addStudentToRoom(formValues, roomsIds)
       resetForm()
     } else {

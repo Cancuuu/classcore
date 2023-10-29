@@ -6,6 +6,7 @@ import { LabelSM, Paragraph, Subtitle, TitleMD } from '../components/Text'
 import { lightShadow } from '../constants/theme'
 import { useNavigation } from '@react-navigation/native'
 import RoomCard from '../components/RoomCard'
+import EmptyList from '../components/EmptyList'
 
 interface IRoomOverviewProps {
   navigation: any
@@ -23,6 +24,7 @@ const RoomsOverview = ({ navigation }: IRoomOverviewProps) => {
           paddingHorizontal: 12
         }}
         data={useRooms}
+        ListEmptyComponent={<EmptyList listName="rooms" />}
         renderItem={(room) => (
           <Pressable
             onPress={() =>
