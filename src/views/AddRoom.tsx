@@ -1,5 +1,5 @@
 import { View, Text, Pressable, Alert } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../layout'
 import { colors, lightShadow } from '../constants/theme'
 import { useForm } from '../hooks/useForm'
@@ -17,6 +17,7 @@ import {
 } from '../constants'
 import { Store_addRoom, Store_editRoom } from '../store'
 import Routes from '../routes'
+import uuid from 'react-native-uuid'
 
 const AddRoom = ({ navigation, route }: { navigation: any; route: any }) => {
   const { isEditing, titleHeader, editRoomForm } = route?.params
@@ -24,6 +25,15 @@ const AddRoom = ({ navigation, route }: { navigation: any; route: any }) => {
     editRoomForm || DEFAULT_ROOM_FORM
   )
   const [color, setColor] = useState<string | null>(editRoomForm?.color || null)
+
+  useEffect(() => {
+    initial()
+  }, [])
+
+  const initial = () => {
+    handleFormValueChange(TIMESTAMP_CREATION, Date.now())
+    handleFormValueChange(ID, uuid.v4())
+  }
 
   const setRoomColor = (color: string) => {
     setColor(color)
@@ -34,6 +44,7 @@ const AddRoom = ({ navigation, route }: { navigation: any; route: any }) => {
     resetForm()
     setColor(null)
     setFormValues(DEFAULT_ROOM_FORM)
+    initial()
   }
 
   const handleSubmit = async () => {

@@ -2,12 +2,21 @@ import { Pressable, View, Text, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Layout from '../layout'
 import { useForm } from '../hooks/useForm'
-import { AGE, DEFAULT_STUDENT_FORM, EMAIL, LAST_NAME, NAME } from '../constants'
+import {
+  AGE,
+  DEFAULT_STUDENT_FORM,
+  EMAIL,
+  ID,
+  LAST_NAME,
+  NAME,
+  TIMESTAMP_CREATION
+} from '../constants'
 import { StyledTextInput } from '../components/StyledTextInput'
 import { STUDENT_SCHEMA } from '../constants/schemas'
 import { colors, lightShadow } from '../constants/theme'
 import { Store_addStudentToRoom, useStore } from '../store'
 import Routes from '../routes'
+import uuid from 'react-native-uuid'
 
 // @todo add picker for gender field
 
@@ -29,6 +38,15 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
     }
   }, [route.params?.selectedOptions])
 
+  useEffect(() => {
+    initial()
+  }, [])
+
+  const initial = () => {
+    handleFormValueChange(TIMESTAMP_CREATION, Date.now())
+    handleFormValueChange(ID, uuid.v4())
+  }
+
   const handleSubmit = async () => {
     const roomsIds = selectedRooms.map((room) => room.id)
     if (roomsIds.length === 0) {
@@ -41,6 +59,7 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
       Store_addStudentToRoom(formValues, roomsIds)
       setSelectedRooms([])
       resetForm()
+      initial()
     } catch (error: any) {
       console.log('😮 There was an error', error)
     }
