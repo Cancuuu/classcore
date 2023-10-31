@@ -9,14 +9,9 @@ import AddStudent from './views/AddStudent'
 import Room from './views/Room'
 import Routes from './routes'
 import SelectionModal from './views/SelectionModal'
-import { useStore } from './store'
 const Stack = createNativeStackNavigator()
 
 function App() {
-  const useRooms = useStore((state) => state.Store_rooms)
-
-  console.log('useRooms', useRooms)
-
   return (
     <>
       <StatusBar style="dark" />

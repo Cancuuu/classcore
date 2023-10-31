@@ -15,12 +15,11 @@ const INITIAL_GLOBAL_STATE: IInitialGlobalState = {
 
 export const useStore = create(persist(() => INITIAL_GLOBAL_STATE, ASYNC_STORAGE_CONFIG))
 
-export const Store_addRoom = (newRoom: TRoom) => {
+export const Store_addRoom = (newRoom: TRoom) =>
   useStore.setState((state: IInitialGlobalState) => ({
     Store_rooms: new Map(state.Store_rooms).set(newRoom.id, newRoom),
     Store_students: state.Store_students
   }))
-}
 
 export const Store_addStudentToRoom = (student: TStudent, roomIds: string[]) =>
   useStore.setState((state: IInitialGlobalState) => {
