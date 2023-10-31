@@ -27,6 +27,7 @@ const AddRoom = ({ navigation, route }: { navigation: any; route: any }) => {
   const [color, setColor] = useState<string | null>(editRoomForm?.color || null)
 
   useEffect(() => {
+    if (isEditing) return
     initial()
   }, [])
 
