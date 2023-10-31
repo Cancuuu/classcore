@@ -21,6 +21,7 @@ const Home = ({ navigation }: any) => (
           color={colors.green}
           onPress={() => navigation.navigate(Routes.ROOMS_OVERVIEW)}
         />
+
         <MainButton
           title="Add Student"
           color={colors.orange}

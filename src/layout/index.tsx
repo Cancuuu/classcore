@@ -10,29 +10,14 @@ export interface LayoutProps {
   titleHeader?: string
   backButton: boolean
   rightEmoji?: string
-  errorMessage: {
-    message?: string
-    time: number
-  } | null
 }
 
-const Layout = ({ children, titleHeader, backButton, rightEmoji, errorMessage }: LayoutProps) => {
+const Layout = ({ children, titleHeader, backButton, rightEmoji }: LayoutProps) => {
   const { top } = useSafeAreaInsets()
   const navigator = useNavigation()
 
-  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (errorMessage) {
-      setTimeout(() => {
-        setShowErrorMessage(false)
-      }, errorMessage.time)
-    }
-  }, [errorMessage])
-
   return (
     <>
-      {showErrorMessage && <ErrorMessage top={top} message={errorMessage?.message} />}
       <View
         style={[
           { padding: 12, backgroundColor: '#F5F7F8', flex: 1 },

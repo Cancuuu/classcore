@@ -30,12 +30,8 @@ export const useForm = (values: Object) => {
   const validateForm = async (schema: Yup.ObjectSchema<any>) => {
     try {
       await schema.validate(formValues)
-      return true
     } catch (error) {
-      if (error) {
-        setFormErrors(error)
-        return false
-      }
+      throw error
     }
   }
 

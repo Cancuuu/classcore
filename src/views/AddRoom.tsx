@@ -1,5 +1,5 @@
-import { View, Text, Pressable } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, Pressable, Alert } from 'react-native'
+import React, { useState } from 'react'
 import Layout from '../layout'
 import { colors, lightShadow } from '../constants/theme'
 import { useForm } from '../hooks/useForm'
@@ -21,33 +21,25 @@ const AddRoom = () => {
   ] = useForm(DEFAULT_ROOM_FORM)
   const [color, setColor] = useState<string | null>(null)
 
-  const errorMessage = formErrors
-    ? {
-        message: formErrors?.toString(),
-        time: 10000
-      }
-    : null
-
   const setRoomColor = (color: string) => {
     setColor(color)
     handleFormValueChange(COLOR, color)
   }
 
   const handleSubmit = async () => {
-    const isFormValid = await validateForm(ROOM_SCHEMA)
-    if (isFormValid) {
-      console.log('Its valid! 🥳')
+    try {
+      await validateForm(ROOM_SCHEMA)
       Store_addRoom(formValues)
       resetForm()
       setColor(null)
-    } else {
-      // @todo create an alert
-      console.log('is not valid', formErrors)
+    } catch (error: any) {
+      console.log('😮 There was an error', error)
+      Alert.alert(error.toString(), '', [{ text: 'OK' }])
     }
   }
 
   return (
-    <Layout titleHeader="Create new room" rightEmoji="✏️" backButton errorMessage={errorMessage}>
+    <Layout titleHeader="Create new room" rightEmoji="✏️" backButton>
       <View style={{ gap: 28 }}>
         <View>
           <ColorPicker setColor={setRoomColor} colorSelected={color} />

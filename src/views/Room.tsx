@@ -10,6 +10,7 @@ import { TRoom } from '../types'
 import EmptyList from '../components/EmptyList'
 import Routes from '../routes'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import StudentCard from '../components/StudentsCard'
 
 interface IRoomProps {
   navigation: any
@@ -28,7 +29,11 @@ const Room = ({ route }: IRoomProps) => {
         ListHeaderComponent={<Header room={room} />}
         ListEmptyComponent={<EmptyList listName="students" />}
         data={room.students}
-        renderItem={(item) => <StudentCard student={item.item} />}
+        renderItem={(item) => (
+          <>
+            <StudentCard student={item.item} />
+          </>
+        )}
       />
     </Layout>
   )
@@ -42,40 +47,6 @@ const Header = ({ room }: { room: TRoom }) => (
       <Subtitle text="Students" />
     </View>
   </>
-)
-
-const StudentCard = ({ student }: any) => (
-  <View
-    style={{
-      backgroundColor: '#FFF',
-      padding: 12,
-      width: '100%',
-      borderRadius: 12,
-      marginBottom: 12,
-      gap: 8,
-      ...lightShadow
-    }}
-  >
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}
-    >
-      <View style={{ flexDirection: 'row' }}>
-        <Subtitle text={`${student[NAME]} ${student[LAST_NAME]}`} />
-        <Subtitle text=" ~ " />
-        <Subtitle text={`${student[AGE]} y/o`} />
-      </View>
-      <LabelSM
-        text={`created: ${new Date(student[TIMESTAMP_CREATION]).toLocaleDateString('es-AR')}`}
-      />
-    </View>
-    <View style={{ flexDirection: 'row' }}>
-      <Label text={`📧 ${student.email} `} />
-    </View>
-  </View>
 )
 
 const RoomsButtons = () => {

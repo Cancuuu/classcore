@@ -1,4 +1,4 @@
-import { Pressable, View, Text } from 'react-native'
+import { Pressable, View, Text, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Layout from '../layout'
 import { useForm } from '../hooks/useForm'
@@ -37,15 +37,19 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
   }, [route.params?.selectedOptions])
 
   const handleSubmit = async () => {
-    const isFormValid = await validateForm(STUDENT_SCHEMA)
-    if (isFormValid) {
-      const roomsIds = selectedRooms.map((room) => room.id)
-      console.log('roomsIds', roomsIds)
+    const roomsIds = selectedRooms.map((room) => room.id)
+    if (roomsIds.length === 0) {
+      Alert.alert('Select Rooms', '', [{ text: 'OK' }])
+      return
+    }
+
+    try {
+      await validateForm(STUDENT_SCHEMA)
       Store_addStudentToRoom(formValues, roomsIds)
       setSelectedRooms([])
       resetForm()
-    } else {
-      console.log('is not valid', formErrors)
+    } catch (error: any) {
+      console.log('😮 There was an error', error)
     }
   }
 
