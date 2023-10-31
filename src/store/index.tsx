@@ -49,4 +49,39 @@ export const Store_addStudentToRoom = (student: TStudent, roomIds: string[]) =>
     }
   })
 
+export const Store_editRoom = (roomToUpdate: TRoom) =>
+  useStore.setState((state: IInitialGlobaState) => {
+    const updatedRooms = state.Store_rooms.map((room) => {
+      if (room.id === roomToUpdate.id) {
+        return roomToUpdate
+      }
+      return room
+    })
+
+    return {
+      Store_rooms: updatedRooms,
+      Store_students: state.Store_students
+    }
+  })
+
+export const Store_deleteRoom = (roomId: string) =>
+  useStore.setState((state: IInitialGlobaState) => {
+    const updatedRooms = state.Store_rooms.filter((room) => room.id !== roomId)
+
+    return {
+      Store_rooms: updatedRooms,
+      Store_students: state.Store_students
+    }
+  })
+
+// export const Store_deleteStudent = (studentId: string) =>
+//   useStore.setState((state: IInitialGlobaState) => {
+//     const updateStudents = state.Store_students.filter((student) => student.id !== studentId)
+
+//     return {
+//       Store_rooms: state.Store_rooms,
+//       Store_students: updateStudents
+//     }
+//   })
+
 export const resetStateAndStorage = () => useStore.setState(INITIAL_GLOBAL_STATE)

@@ -16,6 +16,7 @@ export const useForm = (values: Object) => {
   }, [])
 
   const initial = () => {
+    if (formValues.id) return
     handleFormValueChange(TIMESTAMP_CREATION, Date.now())
     handleFormValueChange(ID, uuid.v4())
   }
@@ -42,13 +43,14 @@ export const useForm = (values: Object) => {
     initial()
   }
 
-  return [
+  return {
     formValues,
     handleFormValueChange,
     setFormValues,
     validateForm,
     formErrors,
     setFormErrors,
-    resetForm
-  ] as const
+    resetForm,
+    initial
+  } as const
 }

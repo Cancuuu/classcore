@@ -14,7 +14,13 @@ const Home = ({ navigation }: any) => (
         <MainButton
           title="Add Room"
           color={colors.pink}
-          onPress={() => navigation.navigate(Routes.ADD_ROOM)}
+          onPress={() =>
+            navigation.navigate(Routes.ADD_ROOM, {
+              isEditing: false,
+              titleHeader: null,
+              editRoomForm: null
+            })
+          }
         />
         <MainButton
           title="Rooms"

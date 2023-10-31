@@ -6,32 +6,47 @@ import { useForm } from '../hooks/useForm'
 import { ColorPicker } from '../components/ColorPicker'
 import { StyledTextInput } from '../components/StyledTextInput'
 import { ROOM_SCHEMA } from '../constants/schemas'
-import { COLOR, DEFAULT_ROOM_FORM, DESCRIPTION, ID, NAME, SUBJECT } from '../constants'
-import { Store_addRoom } from '../store'
+import {
+  COLOR,
+  DEFAULT_ROOM_FORM,
+  DESCRIPTION,
+  ID,
+  NAME,
+  SUBJECT,
+  TIMESTAMP_CREATION
+} from '../constants'
+import { Store_addRoom, Store_editRoom } from '../store'
+import Routes from '../routes'
 
-const AddRoom = () => {
-  const [
-    formValues,
-    handleFormValueChange,
-    setFormValues,
-    validateForm,
-    formErrors,
-    setFormErrors,
-    resetForm
-  ] = useForm(DEFAULT_ROOM_FORM)
-  const [color, setColor] = useState<string | null>(null)
+const AddRoom = ({ navigation, route }: { navigation: any; route: any }) => {
+  const { isEditing, titleHeader, editRoomForm } = route?.params
+  const { formValues, handleFormValueChange, setFormValues, validateForm, resetForm } = useForm(
+    editRoomForm || DEFAULT_ROOM_FORM
+  )
+  const [color, setColor] = useState<string | null>(editRoomForm?.color || null)
 
   const setRoomColor = (color: string) => {
     setColor(color)
     handleFormValueChange(COLOR, color)
   }
 
+  const resetAll = () => {
+    resetForm()
+    setColor(null)
+    setFormValues(DEFAULT_ROOM_FORM)
+  }
+
   const handleSubmit = async () => {
     try {
       await validateForm(ROOM_SCHEMA)
-      Store_addRoom(formValues)
-      resetForm()
-      setColor(null)
+      if (isEditing) {
+        Store_editRoom(formValues)
+        resetAll()
+        navigation.navigate(Routes.ROOMS_OVERVIEW)
+      } else {
+        Store_addRoom(formValues)
+        resetAll()
+      }
     } catch (error: any) {
       console.log('😮 There was an error', error)
       Alert.alert(error.toString(), '', [{ text: 'OK' }])
@@ -39,7 +54,7 @@ const AddRoom = () => {
   }
 
   return (
-    <Layout titleHeader="Create new room" rightEmoji="✏️" backButton>
+    <Layout titleHeader={titleHeader || 'Create new room'} rightEmoji="✏️" backButton>
       <View style={{ gap: 28 }}>
         <View>
           <ColorPicker setColor={setRoomColor} colorSelected={color} />
@@ -75,7 +90,7 @@ const AddRoom = () => {
                 textAlign: 'center'
               }}
             >
-              Create Room
+              {isEditing ? 'Edit Room' : 'Create Room'}
             </Text>
           </View>
         </Pressable>

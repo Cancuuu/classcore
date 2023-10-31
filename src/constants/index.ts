@@ -14,12 +14,12 @@ const GENDER = 'gender'
 const STUDENTS = 'students'
 
 export const DEFAULT_ROOM_FORM = {
-  [ID]: '',
+  [ID]: null,
   [NAME]: '',
   [SUBJECT]: '',
   [DESCRIPTION]: '',
   [COLOR]: '',
-  [TIMESTAMP_CREATION]: 0,
+  [TIMESTAMP_CREATION]: null,
   [STUDENTS]: []
 }
 

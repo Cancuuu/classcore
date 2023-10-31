@@ -17,15 +17,8 @@ interface IAddStudentProps {
 }
 
 const AddStudent = ({ navigation, route }: IAddStudentProps) => {
-  const [
-    formValues,
-    handleFormValueChange,
-    setFormValues,
-    validateForm,
-    formErrors,
-    setFormErrors,
-    resetForm
-  ] = useForm(DEFAULT_STUDENT_FORM)
+  const { formValues, handleFormValueChange, validateForm, resetForm } =
+    useForm(DEFAULT_STUDENT_FORM)
   const [selectedRooms, setSelectedRooms] = useState<Array<any>>([])
   const rooms = useStore((state) => state.Store_rooms)
   const qtySelectedRooms = selectedRooms?.length
