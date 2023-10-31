@@ -34,9 +34,11 @@ const StudentCard = ({ student }: any) => {
           </View>
           <LabelSM text={`created: ${studentCreatedAt}`} />
         </View>
-        <View style={{ flexDirection: 'row', marginTop: 12 }}>
-          <Label text={`📧 ${student.email.toLowerCase()}`} />
-        </View>
+        {student.email && (
+          <View style={{ flexDirection: 'row', marginTop: 12 }}>
+            <Label text={`📧 ${student.email.toLowerCase()}`} />
+          </View>
+        )}
       </View>
     </View>
   )

@@ -76,7 +76,6 @@ const Header = ({ room }: { room: TRoom }) => {
               { text: 'OK', onPress: () => deleteRoom() },
               {
                 text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel'
               }
             ])

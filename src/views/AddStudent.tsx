@@ -62,6 +62,7 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
       initial()
     } catch (error: any) {
       console.log('😮 There was an error', error)
+      Alert.alert(error.toString(), '', [{ text: 'OK' }])
     }
   }
 
