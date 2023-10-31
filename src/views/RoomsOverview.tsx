@@ -12,7 +12,7 @@ interface IRoomOverviewProps {
 
 const RoomsOverview = ({ navigation }: IRoomOverviewProps) => {
   const useRooms = Array.from(useStore((state) => state.Store_rooms))
-  console.log('The rroms', useRooms)
+
   return (
     <Layout titleHeader="Rooms overview" rightEmoji="🎓" backButton>
       <FlatList

@@ -26,9 +26,9 @@ const Room = ({ route }: IRoomProps) => {
         style={{
           paddingHorizontal: 8
         }}
-        ListHeaderComponent={<Header room={room} />}
+        ListHeaderComponent={<Header room={room[1]} />}
         ListEmptyComponent={<EmptyList listName="students" />}
-        data={room.students}
+        data={room[1].students}
         renderItem={(item) => <StudentCard student={item.item} />}
       />
     </Layout>

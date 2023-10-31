@@ -38,10 +38,14 @@ const SelectionModal = ({ navigation, route }: ISelectionModalProps) => {
         <Subtitle text="Select an option" />
       </View>
       {options.map((option: any) => (
-        <Pressable style={{ width: '100%' }} key={option.id} onPress={() => selectOption(option)}>
-          <RoomCard room={option} />
+        <Pressable
+          style={{ width: '100%' }}
+          key={option[0]}
+          onPress={() => selectOption(option[1])}
+        >
+          <RoomCard room={option[1]} />
           <View style={{ position: 'absolute', bottom: 24, right: 5 }}>
-            <Text style={{ fontSize: 42 }}>{wasSelected(option) ? '✅' : ''}</Text>
+            <Text style={{ fontSize: 42 }}>{wasSelected(option[1]) ? '✅' : ''}</Text>
           </View>
         </Pressable>
       ))}

@@ -29,7 +29,7 @@ const AddStudent = ({ navigation, route }: IAddStudentProps) => {
   const { formValues, handleFormValueChange, validateForm, resetForm } =
     useForm(DEFAULT_STUDENT_FORM)
   const [selectedRooms, setSelectedRooms] = useState<Array<any>>([])
-  const rooms = useStore((state) => state.Store_rooms)
+  const rooms = Array.from(useStore((state) => state.Store_rooms))
   const qtySelectedRooms = selectedRooms?.length
 
   useEffect(() => {
